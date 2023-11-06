@@ -1,0 +1,41 @@
+﻿@page "/movies"
+@using CinemaApplication.Blazor.Services;
+@using CinemaApplication.Contract;
+@inject IMovieService MovieService;
+
+@if (Movies == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <h3>Movie List</h3>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Publication Year</th>
+                <th><a href="movies/add" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add Movie</a></th>
+            </tr>
+        </thead>
+        @foreach (Movie movie in Movies)
+        {
+            <tr>
+                <td>@movie.Title</td>
+                <td>@movie.Category</td>
+                <td>@movie.PublicationYear</td>
+                <td><a href="movies/edit/@movie.MovieId" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Edit</a></td>
+            </tr>
+        }
+    </table>
+}
+
+@code {
+    private IEnumerable<Movie>? Movies { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        Movies = await MovieService.GetAllMovieAsync();
+    }
+}

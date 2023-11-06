@@ -1,0 +1,54 @@
+﻿@page "/movies/edit/{id:int}"
+@using CinemaApplication.Blazor.Shared
+@using CinemaApplication.Blazor.Services;
+@using CinemaApplication.Contract;
+@inject IMovieService MovieService;
+@inject NavigationManager NavigationManager
+
+@if (Movie is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <h3>Edit @Movie.Title</h3>
+
+    <MovieForm Movie="@Movie" ButtonTitle="Edit" HandleValidSubmitAsync="@HandleValidSubmitAsync" />
+    <table>
+        <tr>
+            <td><button onclick="@HandleDeleteAsync" class="btn btn-danger form-control">Delete</button></td>
+            <td><button onclick="@HandleBack" class="btn btn-secondary form-control">Back</button></td>
+        </tr>
+    </table>
+
+
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private Movie? Movie { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Movie = await MovieService.GetMovieByIdAsync(Id);
+    }
+
+    private async Task HandleValidSubmitAsync()
+    {
+        await MovieService.UpdateMovieAsync(Id, Movie!);
+        NavigationManager.NavigateTo("/movies");
+    }
+
+    private async Task HandleDeleteAsync()
+    {
+        await MovieService.DeleteMovieAsync(Id);
+        NavigationManager.NavigateTo("/movies");
+    }
+
+    private void HandleBack()
+    {
+        NavigationManager.NavigateTo("/movies");
+    }
+}

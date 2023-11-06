@@ -14,8 +14,6 @@ namespace CinemaApplication.Contract
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DirectorId { get; set; }
         [Required]
-        public int MovieId { get; set; }
-        [Required]
         public string Name { get; set; }
         public int YearOfBirth { get; set; }
     }

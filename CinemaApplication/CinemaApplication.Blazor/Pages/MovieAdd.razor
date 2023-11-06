@@ -1,0 +1,19 @@
+﻿@page "/movies/add"
+@using CinemaApplication.Blazor.Shared
+@using CinemaApplication.Blazor.Services;
+@using CinemaApplication.Contract;
+@inject IMovieService MovieService;
+@inject NavigationManager NavigationManager
+
+<h3>Add Movie</h3>
+<MovieForm Movie="@Movie" ButtonTitle="Add" HandleValidSubmitAsync="@HandleAddAsync" />
+
+@code {
+    private Movie? Movie { get; set; } = new Movie();
+
+    private async Task HandleAddAsync()
+    {
+        await MovieService.AddMovieAsync(Movie!);
+        NavigationManager.NavigateTo("/movies");
+    }
+}
