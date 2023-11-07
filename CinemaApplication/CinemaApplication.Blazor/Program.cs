@@ -9,5 +9,6 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7183") });
 builder.Services.AddScoped<IMovieService, MovieService>();
+builder.Services.AddScoped<IDirectorService, DirectorService>();
 
 await builder.Build().RunAsync();

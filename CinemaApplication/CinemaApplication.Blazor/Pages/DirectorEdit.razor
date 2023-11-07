@@ -1,0 +1,54 @@
+﻿@page "/directors/edit/{id:int}"
+@using CinemaApplication.Blazor.Shared
+@using CinemaApplication.Blazor.Services;
+@using CinemaApplication.Contract;
+@inject IDirectorService DirectorService;
+@inject NavigationManager NavigationManager
+
+@if (Director is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <h3>Edit @Director.Name</h3>
+
+    <DirectorForm Director="@Director" ButtonTitle="Edit" HandleValidSubmitAsync="@HandleValidSubmitAsync" />
+    <table>
+        <tr>
+            <td><button onclick="@HandleDeleteAsync" class="btn btn-danger form-control">Delete</button></td>
+            <td><button onclick="@HandleBack" class="btn btn-secondary form-control">Back</button></td>
+        </tr>
+    </table>
+
+
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private Director? Director { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Director = await DirectorService.GetDirectorByIdAsync(Id);
+    }
+
+    private async Task HandleValidSubmitAsync()
+    {
+        await DirectorService.UpdatDirectorAsync(Id, Director!);
+        NavigationManager.NavigateTo("/directors");
+    }
+
+    private async Task HandleDeleteAsync()
+    {
+        await DirectorService.DeleteDirectorAsync(Id);
+        NavigationManager.NavigateTo("/directors");
+    }
+
+    private void HandleBack()
+    {
+        NavigationManager.NavigateTo("/directors");
+    }
+}

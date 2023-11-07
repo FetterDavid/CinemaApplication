@@ -1,0 +1,39 @@
+﻿@page "/directors"
+@using CinemaApplication.Blazor.Services;
+@using CinemaApplication.Contract;
+@inject IDirectorService DirectorService;
+
+@if (Directors == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <h3>Movie List</h3>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Year of birth</th>
+                <th><a href="directors/add" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add Director</a></th>
+            </tr>
+        </thead>
+        @foreach (Director director in Directors)
+        {
+            <tr>
+                <td>@director.Name</td>
+                <td>@director.YearOfBirth</td>
+                <td><a href="directors/edit/@director.DirectorId" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Edit</a></td>
+            </tr>
+        }
+    </table>
+}
+
+@code {
+    private IEnumerable<Director>? Directors { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        Directors = await DirectorService.GetAllDirectorAsync();
+    }
+}

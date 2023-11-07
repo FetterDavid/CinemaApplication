@@ -1,0 +1,35 @@
+﻿@using CinemaApplication.Contract;
+
+@if (Director is null || HandleValidSubmitAsync is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <EditForm Model="@Director" OnValidSubmit="@HandleValidSubmitAsync">
+        <div class="mb0">
+            <label class="col-form-label">Name</label>
+            <InputText @bind-Value="@Director.Name" class="form-control" />
+        </div>
+        <div class="mb0">
+            <label class="col-form-label">Year of birth</label>
+            <InputNumber @bind-Value="@Director.YearOfBirth" class="form-control" />
+        </div>
+        <table>
+            <tr>
+                <td><button style="margin-top:10px" type="submit" class="btn btn-primary form-control mb-3">@ButtonTitle</button></td>
+            </tr>
+        </table>
+    </EditForm>
+}
+
+@code {
+    [Parameter]
+    public Director? Director { get; set; }
+
+    [Parameter]
+    public string? ButtonTitle { get; set; }
+
+    [Parameter]
+    public Func<Task>? HandleValidSubmitAsync { get; set; }
+}
