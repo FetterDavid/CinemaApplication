@@ -20,14 +20,19 @@ else
             <InputNumber @bind-Value="@Movie.PublicationYear" class="form-control" />
         </div>
         <div class="mb0">
-            <label class="col-form-label">DirectorId</label>
-            <InputNumber @bind-Value="@Movie.DirectorId" class="form-control" />
+            <label class="col-form-label">Director</label>
+            <select id="categorySelect" @bind="@Movie.DirectorName" class="form-control">
+                @foreach (var category in directorNames)
+                {
+                    <option value="@category">@category</option>
+                }
+            </select>
         </div>
         <table>
             <tr>
                 <td><button style="margin-top:10px" type="submit" class="btn btn-primary form-control mb-3">@ButtonTitle</button></td>
             </tr>
-        </table>     
+        </table>
     </EditForm>
 }
 
@@ -40,4 +45,16 @@ else
 
     [Parameter]
     public Func<Task>? HandleValidSubmitAsync { get; set; }
+
+    [Parameter]
+    public IEnumerable<Director>? Directors { get; set; }
+
+    private List<string> directorNames = new List<string>();
+
+
+    protected override void OnInitialized()
+    {
+        Movie.DirectorName = Directors.FirstOrDefault(x => x.DirectorId == Movie.DirectorId)?.Name ?? Directors.First().Name;
+        directorNames.AddRange(Directors.Select(x => x.Name));
+    }
 }

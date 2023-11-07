@@ -19,5 +19,7 @@ namespace CinemaApplication.Contract
         public string Title { get; set; }
         public string Category { get; set; }
         public int PublicationYear { get; set; }
+        [NotMapped] //nem mentjük az adatbázisba
+        public string DirectorName { get; set; } = "";
     }
 }
