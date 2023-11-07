@@ -7,6 +7,7 @@ namespace CinemaApplication.Blazor.Services
     {
         Task<IEnumerable<Movie>?> GetAllMovieAsync();
         Task<Movie?> GetMovieByIdAsync(int id);
+        Task<IEnumerable<Movie>?> GetMovieByDirectorIdAsync(int directorId);
         Task AddMovieAsync(Movie movie);
         Task DeleteMovieAsync(int id);
         Task UpdateMovieAsync(int id, Movie movie);

@@ -2,6 +2,8 @@
 @using CinemaApplication.Blazor.Services;
 @using CinemaApplication.Contract;
 @inject IDirectorService DirectorService;
+@inject IMovieService MovieService;
+@inject NavigationManager NavigationManager
 
 @if (Directors == null)
 {
@@ -15,6 +17,7 @@ else
             <tr>
                 <th>Name</th>
                 <th>Year of birth</th>
+                <th>Directed Movies</th>
                 <th><a href="directors/add" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add Director</a></th>
             </tr>
         </thead>
@@ -23,7 +26,18 @@ else
             <tr>
                 <td>@director.Name</td>
                 <td>@director.YearOfBirth</td>
-                <td><a href="directors/edit/@director.DirectorId" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Edit</a></td>
+                <td>
+                    <ul>
+                        @foreach (Movie movie in director.DirectedMovies)
+                        {
+                            <li><a href="movies/edit/@movie.MovieId">@movie.Title</a></li>
+                        }
+                    </ul>
+                </td>
+                <td>
+                    <a href="directors/edit/@director.DirectorId" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Edit</a>
+                    <button @onclick="() => HandleDeleteAsync(director.DirectorId)" class="btn btn-danger btn-lg active" role="button" aria-pressed="true">Delete</button>
+                </td>
             </tr>
         }
     </table>
@@ -32,8 +46,18 @@ else
 @code {
     private IEnumerable<Director>? Directors { get; set; }
 
+    private async Task HandleDeleteAsync(int id)
+    {
+        await DirectorService.DeleteDirectorAsync(id);
+        NavigationManager.NavigateTo("/directors", true);
+    }
+
     protected async override Task OnInitializedAsync()
     {
         Directors = await DirectorService.GetAllDirectorAsync();
+        foreach (Director director in Directors)
+        {
+            director.DirectedMovies = (await MovieService.GetMovieByDirectorIdAsync(director.DirectorId)).ToList();
+        }
     }
 }

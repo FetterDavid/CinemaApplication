@@ -16,5 +16,7 @@ namespace CinemaApplication.Contract
         [Required]
         public string Name { get; set; }
         public int YearOfBirth { get; set; }
+        [NotMapped] //nem mentjük az adatbázisba
+        public List<Movie>? DirectedMovies { get; set; }
     }
 }
