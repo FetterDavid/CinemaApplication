@@ -15,9 +15,10 @@ namespace CinemaApplication.Contract
         public int MovieId { get; set; }
         [Required]
         public int DirectorId { get; set; }
-        [Required]
+        [Required, MaxLength(256)]
         public string Title { get; set; }
-        public string Category { get; set; }
+        public string? Category { get; set; }
+        [Range(1800,2023)]
         public int PublicationYear { get; set; }
         [NotMapped] //nem mentjük az adatbázisba
         public string DirectorName { get; set; } = "";

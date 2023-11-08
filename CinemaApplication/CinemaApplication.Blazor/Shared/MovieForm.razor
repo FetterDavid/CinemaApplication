@@ -7,17 +7,21 @@
 else
 {
     <EditForm Model="@Movie" OnValidSubmit="@HandleValidSubmitAsync">
+        <DataAnnotationsValidator />
         <div class="mb0">
             <label class="col-form-label">Title</label>
             <InputText @bind-Value="@Movie.Title" class="form-control" />
+            <ValidationMessage For="() => Movie.Title" />
         </div>
         <div class="mb0">
             <label class="col-form-label">Category</label>
             <InputText @bind-Value="@Movie.Category" class="form-control" />
+            <ValidationMessage For="() => Movie.Category" />
         </div>
         <div class="mb0">
             <label class="col-form-label">Publication Year</label>
             <InputNumber @bind-Value="@Movie.PublicationYear" class="form-control" />
+            <ValidationMessage For="() => Movie.PublicationYear" />
         </div>
         <div class="mb0">
             <label class="col-form-label">Director</label>
