@@ -7,13 +7,21 @@
 else
 {
     <EditForm Model="@Director" OnValidSubmit="@HandleValidSubmitAsync">
+        <DataAnnotationsValidator />
         <div class="mb0">
             <label class="col-form-label">Name</label>
             <InputText @bind-Value="@Director.Name" class="form-control" />
+            <ValidationMessage For="() => Director.Name" />
         </div>
         <div class="mb0">
             <label class="col-form-label">Year of birth</label>
             <InputNumber @bind-Value="@Director.YearOfBirth" class="form-control" />
+            <ValidationMessage For="() => Director.YearOfBirth" />
+        </div>
+        <div class="mb0">
+            <label class="col-form-label">Nationality</label>
+            <InputText @bind-Value="@Director.Nationality" class="form-control" />
+            <ValidationMessage For="() => Director.Nationality" />
         </div>
         <table>
             <tr>

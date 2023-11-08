@@ -13,9 +13,12 @@ namespace CinemaApplication.Contract
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DirectorId { get; set; }
-        [Required]
+        [Required, MaxLength(128)]
         public string Name { get; set; }
+        [Range(1800, 2023)]
         public int YearOfBirth { get; set; }
+        [MaxLength(64)]
+        public string? Nationality { get; set; }
         [NotMapped] //nem mentjük az adatbázisba
         public List<Movie>? DirectedMovies { get; set; }
     }
