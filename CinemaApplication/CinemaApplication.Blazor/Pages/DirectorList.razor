@@ -48,7 +48,7 @@ else
 
     private async Task HandleDeleteAsync(int id)
     {
-        await DirectorService.DeleteDirectorAsync(id);
+        await DirectorService.DeleteDirectorWithMoviesAsync(id);
         NavigationManager.NavigateTo("/directors", true);
     }
 

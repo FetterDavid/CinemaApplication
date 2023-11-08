@@ -1,4 +1,5 @@
 ﻿using CinemaApplication.Contract;
+using System.Net.Http;
 using System.Net.Http.Json;
 
 namespace CinemaApplication.Blazor.Services
@@ -15,6 +16,8 @@ namespace CinemaApplication.Blazor.Services
         public async Task AddDirectorAsync(Director director) => await _httpClient.PostAsJsonAsync($"Director", director);
 
         public async Task DeleteDirectorAsync(int id) => await _httpClient.DeleteAsync($"Director/{id}");
+
+        public async Task DeleteDirectorWithMoviesAsync(int id) => await _httpClient.DeleteAsync($"Director/with-movies/{id}");
 
         public async Task<IEnumerable<Director>?> GetAllDirectorAsync() => await _httpClient.GetFromJsonAsync<IEnumerable<Director>>("Director");
 
