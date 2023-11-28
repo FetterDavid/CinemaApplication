@@ -3,31 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaApplication.Api", "CinemaApplication.Api\CinemaApplication.Api.csproj", "{C25DF4E7-3D71-4884-9905-3F386B6BCA66}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaApplication.Contract", "CinemaApplication.Contract\CinemaApplication.Contract.csproj", "{A31EEE25-7B63-4304-9582-64D2C1F5BB1E}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaApplication.Blazor", "CinemaApplication.Blazor\CinemaApplication.Blazor.csproj", "{B1D00F91-AB75-4982-B2A9-758A30B92452}"
-EndProject
 Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C25DF4E7-3D71-4884-9905-3F386B6BCA66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C25DF4E7-3D71-4884-9905-3F386B6BCA66}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C25DF4E7-3D71-4884-9905-3F386B6BCA66}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C25DF4E7-3D71-4884-9905-3F386B6BCA66}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A31EEE25-7B63-4304-9582-64D2C1F5BB1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A31EEE25-7B63-4304-9582-64D2C1F5BB1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A31EEE25-7B63-4304-9582-64D2C1F5BB1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A31EEE25-7B63-4304-9582-64D2C1F5BB1E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B1D00F91-AB75-4982-B2A9-758A30B92452}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B1D00F91-AB75-4982-B2A9-758A30B92452}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B1D00F91-AB75-4982-B2A9-758A30B92452}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B1D00F91-AB75-4982-B2A9-758A30B92452}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
