@@ -1,0 +1,29 @@
+﻿@using CinemaApplication.Client.Services;
+@using CinemaApplication.Shared;
+@inject IDirectorService DirectorService;
+
+<div class="flip-card">
+    <div class="flip-card-inner">
+        <div class="flip-card-front">
+            <img src="@($"data:image/png;base64,{Convert.ToBase64String(Movie.Image)}")" style="width:225px;height:300px;">
+        </div>
+        <div class="flip-card-back">
+            <h1>@Movie.Title</h1>
+            <p>@DirectorName</p>
+            <p>@Movie.PublicationYear</p>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Movie Movie { get; set; }
+
+    public string DirectorName { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        var Directors = await DirectorService.GetAllDirectorAsync();
+        DirectorName = Directors.FirstOrDefault(x => x.DirectorId == Movie.DirectorId).Name;
+    }
+}

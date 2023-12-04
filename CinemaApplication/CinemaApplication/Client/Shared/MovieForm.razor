@@ -32,6 +32,14 @@ else
                 }
             </select>
         </div>
+        <div class="mb0">
+            <label class="col-form-label">Movie Image</label>
+            <InputFile OnChange="@UploadImage" class="form-control" />
+            @if (Movie.Image != null)
+            {
+                <img src="@($"data:image/png;base64,{Convert.ToBase64String(Movie.Image)}")" style="max-width: 200px; max-height: 200px;" />
+            }
+        </div>
         <table>
             <tr>
                 <td><button style="margin-top:10px" type="submit" class="btn btn-primary form-control mb-3">@ButtonTitle</button></td>
@@ -55,6 +63,21 @@ else
 
     private List<string> directorNames = new List<string>();
 
+    private async Task UploadImage(InputFileChangeEventArgs e)
+    {
+        var imageFiles = e.GetMultipleFiles();
+        if (imageFiles.Count > 0)
+        {
+            var imageFile = imageFiles.First();
+            if (imageFile != null)
+            {
+                using var stream = imageFile.OpenReadStream();
+                using var ms = new MemoryStream();
+                await stream.CopyToAsync(ms);
+                Movie.Image = ms.ToArray();
+            }
+        }
+    }
 
     protected override void OnInitialized()
     {

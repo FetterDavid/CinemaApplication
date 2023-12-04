@@ -1,0 +1,42 @@
+﻿@page "/"
+@page "/catalog"
+@using Microsoft.AspNetCore.Authorization;
+@attribute [Authorize]
+@using CinemaApplication.Client.Services;
+@using CinemaApplication.Shared;
+@inject IMovieService MovieService;
+
+
+@if (Movies == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <table class="cards-table">
+        @for (int row = 0; row < (Movies.Count() + 3) / 4; row++) // Calculate number of rows
+        {
+            <tr>
+                @for (int col = 0; col < 4; col++) // Four movies per row
+                {
+                    int index = row * 4 + col;
+                    if (index < Movies.Count() && Movies.ElementAt(index).Image != null)
+                    {
+                        <td>
+                            <FlipCard Movie="Movies.ElementAt(index)" />
+                        </td>
+                    }
+                }
+            </tr>
+        }
+    </table>
+}
+
+@code {
+    private IEnumerable<Movie>? Movies { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        Movies = await MovieService.GetAllMovieAsync();
+    }
+}

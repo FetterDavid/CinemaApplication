@@ -20,6 +20,7 @@ namespace CinemaApplication.Shared
         public string? Category { get; set; }
         [Range(1800,2023)]
         public int PublicationYear { get; set; }
+        public byte[]? Image { get; set; }
         [NotMapped] //nem mentjük az adatbázisba
         public string DirectorName { get; set; } = "";
     }
